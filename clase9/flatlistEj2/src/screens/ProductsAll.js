@@ -135,7 +135,7 @@ class ProductsAll extends Component{
 const styles = StyleSheet.create({
   screen:{
     flex: 1,
-    alignItems: "center"
+    
   },
   flatList: {
     flex: 1,
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontWeight: "bold",
-    color: "#b03060",
+    color: "red",
     fontSize: 20,
     marginBottom: 30,
 
