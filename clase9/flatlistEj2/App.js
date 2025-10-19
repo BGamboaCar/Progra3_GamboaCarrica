@@ -4,7 +4,7 @@ import ProductsAll from './src/screens/ProductsAll';
 
 export default function App() {
   return (
-    <View>
+    <View style={styles.container}>
       <ProductsAll/>
     </View>
 
@@ -14,8 +14,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    backgroundColor: 'pink',
   },
 });
