@@ -1,9 +1,13 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import DynamicForm from "../components/DynamicForm";
 function Home() {
     return(            
             <View style={styles.contenedor} >
                 <Text style={styles.titulo} > Home</Text>
+                <Text>
+                    <DynamicForm/>
+                </Text>
             </View>
         );
 }
@@ -20,7 +24,7 @@ const styles = StyleSheet.create({
         color: "#b03060",
         textAlign: "center",
         fontSize: 16,
-        marginBottom: 10
+        marginBottom: 3
 
     }
 
