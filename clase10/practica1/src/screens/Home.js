@@ -1,33 +1,71 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import React, { Component } from "react";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import { db } from "../firebase/config";
+import Post from "../components/Post";
 import DynamicForm from "../components/DynamicForm";
-function Home() {
-    return(            
-            <View style={styles.contenedor} >
-                <Text style={styles.titulo} > Home</Text>
-                <Text>
-                    <DynamicForm/>
-                </Text>
-            </View>
-        );
+
+class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+    };
+  }
+
+  componentDidMount() {
+    db.collection("posts").onSnapshot(
+        docs => {
+        let postsNuevos = [];
+        docs.forEach(doc => {
+          postsNuevos.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        });
+        this.setState({
+          posts: postsNuevos,
+        });
+      });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.texto}>Home</Text>
+
+        <FlatList
+          data={this.state.posts}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <Post data={item} />}
+        />
+
+        <DynamicForm/>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    contenedor: {
-        padding: 10,
-        backgroundColor: "pink",
-        borderRadius: 25,
-        margin: 15
-    }, 
-    titulo: {
-        fontWeight: "bold",
-        color: "#b03060",
-        textAlign: "center",
-        fontSize: 16,
-        marginBottom: 3
-
-    }
-
-})
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20
+  },
+  texto: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 100,
+    fontWeight: "bold",
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: "pink",
+    marginTop: 50,
+    textAlign: "center",
+  },
+});
 
 export default Home;
